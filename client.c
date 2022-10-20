@@ -6,11 +6,13 @@
 /*   By: nxoo <nxoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 23:55:21 by nxoo              #+#    #+#             */
-/*   Updated: 2022/10/19 05:08:11 by nxoo             ###   ########.fr       */
+/*   Updated: 2022/10/20 20:38:28 by nxoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+#define TERNARY(a, b) (a & b ? 1 : 0)
 
 static int	ft_isspace(const char c)
 {
@@ -21,7 +23,7 @@ static int	ft_isspace(const char c)
 static int	ft_atoi(const char *str)
 {
 	int		neg;
-	long	res;
+	int		res;
 
 	res = 0;
 	neg = 1;
@@ -38,20 +40,22 @@ static int	ft_atoi(const char *str)
 		res = (res * 10) + (*str - '0');
 		str++;
 	}
-	return (res * neg);
+	return (res * neg); 
 }
 
 void	encode(int pid, unsigned char *encode)
 {
-	static const int signals[] = {SIGUSR2, SIGUSR1};
+	static const int	signals[] = {SIGUSR2, SIGUSR1};
+	unsigned int		i;
+
 	while (*encode)
 	{
-		unsigned int i = 1 << 7;
+		i = 1 << 7;
 		while (i)
 		{
-			kill(pid, signals[*encode & i ? 1 : 0]);
+			kill(pid, signals[TERNARY(*encode, i)]);
 			i >>= 1;
-			usleep(500);
+			usleep(150);
 		}
 		encode++;
 	}

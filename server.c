@@ -6,7 +6,7 @@
 /*   By: nxoo <nxoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 23:55:21 by nxoo              #+#    #+#             */
-/*   Updated: 2022/10/19 05:12:21 by nxoo             ###   ########.fr       */
+/*   Updated: 2022/10/20 20:38:54 by nxoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,12 @@ void	ft_putnbr(int n)
 
 void	tst(int signalnum)
 {
-	static const unsigned int	pow[] = {1, 2, 4, 8, 16, 32, 64, 128};
 	static int nsig = 7;
 	static unsigned char c = 0;
 	if (signalnum > 0)
 	{
 		if (signalnum == SIGUSR1)
-			c += pow[nsig];
+			c += 1 << nsig;
 		nsig--;
 	}
 	if (nsig == -1)
@@ -59,12 +58,12 @@ void	tst(int signalnum)
 }
 
 
-int	main(int ac, char **av)
+int	main(void)
 {
 	ft_putnbr(getpid());
 	signal(SIGUSR1, tst);
 	signal(SIGUSR2, tst);
 	while (42)
-		;
+		sleep(5000);
 	return (0);
 }
