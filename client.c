@@ -6,7 +6,7 @@
 /*   By: nxoo <nxoo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 23:55:21 by nxoo              #+#    #+#             */
-/*   Updated: 2022/10/20 20:38:28 by nxoo             ###   ########.fr       */
+/*   Updated: 2022/10/21 01:15:31 by nxoo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,10 @@
 
 #define TERNARY(a, b) (a & b ? 1 : 0)
 
-static int	ft_isspace(const char c)
+static \
+void	usage(void)
 {
-	return (c == ' ' || c == '\t' || c == '\v'
-		|| c == '\n' || c == '\r' || c == '\f');
-}
-
-static int	ft_atoi(const char *str)
-{
-	int		neg;
-	int		res;
-
-	res = 0;
-	neg = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			neg *= -1;
-		str++;
-	}
-	while (*str && *str >= '0' && *str <= '9')
-	{
-		res = (res * 10) + (*str - '0');
-		str++;
-	}
-	return (res * neg); 
+	ft_putstr("usage: ./program_name [ProcessID] [message]\n");
 }
 
 void	encode(int pid, unsigned char *encode)
@@ -53,9 +30,13 @@ void	encode(int pid, unsigned char *encode)
 		i = 1 << 7;
 		while (i)
 		{
-			kill(pid, signals[TERNARY(*encode, i)]);
+			if (kill(pid, signals[TERNARY(*encode, i)]) < 0)
+			{
+				ft_putstr("Wrong pid, program exiting ..\n");
+				return ;
+			}
 			i >>= 1;
-			usleep(150);
+			usleep(200);
 		}
 		encode++;
 	}
@@ -65,5 +46,7 @@ int		main(int ac, char **av)
 {
 	if (ac == 3)
 		encode(ft_atoi(av[1]), (unsigned char *)av[2]);
+	else
+		usage();
 	return (0);
 }
