@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putnendl.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 22:56:18 by jewancti          #+#    #+#             */
-/*   Updated: 2022/12/13 22:56:20 by jewancti         ###   ########.fr       */
+/*   Created: 2022/10/30 23:45:49 by nxoo              #+#    #+#             */
+/*   Updated: 2022/12/02 15:09:27 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-# include "ft_printf/ft_printf.h"
-
-typedef struct sigaction	t_saction;
-
-int		parse_pid(const char *s);
-void	ft_strjoin2(char **line, const char *s1);
-
-#endif
+ssize_t	ft_putnendl(const char *s, size_t len)
+{
+	return (ft_putnendl_fd(s, len, 1));
+}

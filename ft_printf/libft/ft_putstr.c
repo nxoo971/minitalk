@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 22:56:18 by jewancti          #+#    #+#             */
-/*   Updated: 2022/12/13 22:56:20 by jewancti         ###   ########.fr       */
+/*   Created: 2022/10/21 01:02:29 by nxoo              #+#    #+#             */
+/*   Updated: 2022/11/11 13:50:36 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
+ssize_t	ft_putstr(const char *s)
+{
+	ssize_t	written;
 
-# include "ft_printf/ft_printf.h"
-
-typedef struct sigaction	t_saction;
-
-int		parse_pid(const char *s);
-void	ft_strjoin2(char **line, const char *s1);
-
-#endif
+	if (s)
+	{
+		written = ft_strlen(s);
+		return (write(1, s, written));
+	}
+	return (0);
+}

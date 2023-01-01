@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 22:56:18 by jewancti          #+#    #+#             */
-/*   Updated: 2022/12/13 22:56:20 by jewancti         ###   ########.fr       */
+/*   Created: 2022/09/06 22:28:14 by ooxn              #+#    #+#             */
+/*   Updated: 2022/12/08 00:12:56 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
+int	ft_atoi(const char *str)
+{
+	int		neg;
+	long	res;
 
-# include "ft_printf/ft_printf.h"
-
-typedef struct sigaction	t_saction;
-
-int		parse_pid(const char *s);
-void	ft_strjoin2(char **line, const char *s1);
-
-#endif
+	res = 0;
+	neg = 1;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			neg *= -1;
+		str++;
+	}
+	while (ft_isdigit(*str))
+	{
+		res = (res * 10) + (*str - '0');
+		str++;
+	}
+	return (res * neg);
+}

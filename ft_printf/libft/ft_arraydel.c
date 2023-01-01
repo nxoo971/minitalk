@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_arraydel.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 22:56:18 by jewancti          #+#    #+#             */
-/*   Updated: 2022/12/13 22:56:20 by jewancti         ###   ########.fr       */
+/*   Created: 2022/12/07 05:59:02 by jewancti          #+#    #+#             */
+/*   Updated: 2022/12/08 03:23:42 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "libft.h"
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
+void	ft_arraydel(void **ptr)
+{
+	int		i;
 
-# include "ft_printf/ft_printf.h"
-
-typedef struct sigaction	t_saction;
-
-int		parse_pid(const char *s);
-void	ft_strjoin2(char **line, const char *s1);
-
-#endif
+	i = -1;
+	if (!ptr)
+		return ;
+	while ((unsigned char **)ptr[++i])
+		ft_memdel(ptr + i);
+	free(ptr);
+}

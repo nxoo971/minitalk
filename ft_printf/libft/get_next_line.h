@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jewancti <jewancti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 22:56:18 by jewancti          #+#    #+#             */
-/*   Updated: 2022/12/13 22:56:20 by jewancti         ###   ########.fr       */
+/*   Created: 2022/09/15 23:23:09 by ooxn              #+#    #+#             */
+/*   Updated: 2022/12/08 23:15:20 by jewancti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include <signal.h>
-# include <unistd.h>
-# include <stdlib.h>
+# include <fcntl.h>
+# include "libft.h"
 
-# include "ft_printf/ft_printf.h"
+# define BUFFER_SIZE	4096
 
-typedef struct sigaction	t_saction;
-
-int		parse_pid(const char *s);
-void	ft_strjoin2(char **line, const char *s1);
+char	*get_next_line(int fd, int destroy);
+char	*ft_strdupcpy(char *d1, char *s1, char *s2, int n);
+int		readuntil(char **bufferline, int fd);
+void	ft_freetab(char ***ptr, int force);
 
 #endif
